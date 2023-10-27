@@ -1,0 +1,11 @@
+body {
+    display: flex;
+    justify-content: center;
+}
+
+.grid {
+    border: 2px solid black;
+    display: flex;
+    flex-basis: 320px;
+    flex-wrap: wrap;
+}
