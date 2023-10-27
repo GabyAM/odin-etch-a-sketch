@@ -16,11 +16,19 @@ function setPixelColor(pixel, color) {
     pixel.style.backgroundColor = color;
 }
 
-function updateColor() {
+
+function updatePaintingMode(mode) {
+    console.log('calling...')
     const $pixels = document.querySelectorAll('.pixel');
+    if (mode === 'color') {
+        $pixels.forEach(pixel => {
+            pixel.onmouseover = () => setPixelColor(pixel, getRandomRGB())  
+        })
+        return
+    } 
+
     $pixels.forEach(pixel => {
-        pixel.removeEventListener('mouseover', () => setPixelColor(newDiv, 'black'))
-        pixel.addEventListener('mouseover', () => setPixelColor(pixel, getRandomRGB()))
+        pixel.onmouseover = () => setPixelColor(pixel, 'black')  
     })
 }
 
@@ -55,7 +63,10 @@ function init() {
     $changeSizeButton.addEventListener('click', changeGridSize)
 
     const $colorModeButton = document.querySelector('.color-mode-button');
-    $colorModeButton.addEventListener('click', updateColor)
+    $colorModeButton.addEventListener('click', () => updatePaintingMode('color'))
+
+    const $defaultModeButton = document.querySelector('.default-mode-button');
+    $defaultModeButton.addEventListener('click', () => updatePaintingMode('default'))
 }
 
 init()
