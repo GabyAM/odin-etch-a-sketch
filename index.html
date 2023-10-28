@@ -7,16 +7,22 @@
     <link rel="stylesheet" href="main.css">
 </head>
 <body>
-    <label for="grid-size-input">Choose the size of the grid</label>
-    <input id="grid-size-input" type="number" min="8"  max="100" placeholder="16">
-    <button class="change-size-button">Change</button>
-
-    <button class="reset-button">reset</button>
+    <div class="options">
+        <div class="size-change-container">
+            <label for="grid-size-input">Choose the size of the grid</label>
+            <input id="grid-size-input" type="number" min="8"  max="100" placeholder="16">
+            <button class="change-size-button">Change</button>
+        </div>
+        <div class="mode-buttons-container">
+            <h3>Select painting mode</h3>
+            <button class="color-mode-button">Color</button>
+            <button class="default-mode-button">Default</button>
+            <button class="darkening-mode-button">Darkening</button>
+        </div>
+        <button class="reset-button">reset</button>
+    </div>
     <div class="grid">
     </div>
-    <button class="color-mode-button">Color mode</button>
-    <button class="default-mode-button">Default mode</button>
-    <button class="darkening-mode-button">Darkening mode</button>
 </body>
 <script src="index.js"></script>
 </html>

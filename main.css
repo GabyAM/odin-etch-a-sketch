@@ -1,6 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;700&display=swap');
+
+*{
+    font-family: 'Quicksand', sans-serif;
+}
 body {
+    background: #8A2387;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #F27121, #E94057, #8A2387);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #F27121, #E94057, #8A2387); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     display: flex;
+    align-items: center;
+    padding-top: 100px;
     justify-content: center;
+    align-items: center;
+    gap: 32px;
 }
 
 .grid {
@@ -8,4 +20,46 @@ body {
     display: flex;
     flex-basis: 320px;
     flex-wrap: wrap;
+}
+
+.options {
+    background-color: snow;
+    height: 320px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    flex-basis: 280px;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#grid-size-input{
+    height: 20px;
+    width: 100px;
+}
+
+button {
+    height: 30px;
+    width: 80px;
+    font-weight: 700;
+    font-size: 16px;
+    background-color: #292929;
+    color: snow;
+    border-style: none;
+    border-radius: 6px;
+}
+
+.darkening-mode-button{
+    width: 90px;
+}
+
+.size-change-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+}
+
+.mode-buttons-container {
+    text-align: center;
 }
