@@ -16,9 +16,14 @@ function setPixelColor(pixel, color) {
     pixel.style.backgroundColor = color;
 }
 
+function getDarkenedColor(previousColor) {
+    const rgbValues = previousColor === 'white' 
+                ? ['255','255','255'] : previousColor.slice(4, -1).split(',');
+    const newValues = rgbValues.map(value => Math.max((Number(value) - 10), 0))
+    return `rgb(${newValues[0]}, ${newValues[1]}, ${newValues[2]} )`
+}
 
 function updatePaintingMode(mode) {
-    console.log('calling...')
     const $pixels = document.querySelectorAll('.pixel');
     if (mode === 'color') {
         $pixels.forEach(pixel => {
@@ -26,10 +31,18 @@ function updatePaintingMode(mode) {
         })
         return
     } 
-
-    $pixels.forEach(pixel => {
-        pixel.onmouseover = () => setPixelColor(pixel, 'black')  
-    })
+    
+    else if (mode === 'default') { 
+        $pixels.forEach(pixel => {
+            pixel.onmouseover = () => setPixelColor(pixel, 'black')  
+        })
+        return
+    }
+    else if(mode === 'darkening') {
+        $pixels.forEach(pixel => {
+            pixel.onmouseover = () => setPixelColor(pixel, getDarkenedColor(pixel.style.backgroundColor))
+        })
+    }
 }
 
 function createGrid(gridSize = 256) {
@@ -37,7 +50,8 @@ function createGrid(gridSize = 256) {
     for(let i=0; i<gridSize; i++) {
         const newDiv = document.createElement('div')
         newDiv.classList.add('pixel');
-        newDiv.addEventListener("mouseover", () => setPixelColor(newDiv, 'black'))
+        newDiv.style.backgroundColor = 'rgb(255,255,255)'
+        newDiv.onmouseover = () => setPixelColor(newDiv, 'black')
 
         const size = 320 / (Math.sqrt(gridSize))
         newDiv.style.width = `${size}px`;
@@ -48,7 +62,7 @@ function createGrid(gridSize = 256) {
 
 function changeGridSize() {
     const gridSize = document.querySelector('#grid-size-input').value;
-
+    if (gridSize === '') return
     const $grid = document.querySelector('.grid');
     $grid.innerHTML = '';
     createGrid(Math.pow(gridSize, 2));
@@ -67,6 +81,9 @@ function init() {
 
     const $defaultModeButton = document.querySelector('.default-mode-button');
     $defaultModeButton.addEventListener('click', () => updatePaintingMode('default'))
+
+    const $darkeningModeButton = document.querySelector('.darkening-mode-button')
+    $darkeningModeButton.addEventListener('click', () => updatePaintingMode('darkening'))
 }
 
 init()
